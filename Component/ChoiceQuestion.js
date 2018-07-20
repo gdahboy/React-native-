@@ -18,8 +18,6 @@ export default class ChoiceQuestions extends Component {
                 radio_props = {Question}
                 onPress = {(value) => {}}
                 /> 
-
-
             </View>
         ) ; 
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {View , Text } from 'react-native'
+import {View , Text  , Button} from 'react-native'
+import seeresult from "./seeresult"
 
 export default class Questiotwo extends Component {
   render() {
@@ -8,7 +9,7 @@ export default class Questiotwo extends Component {
         <Text>
             question2
             </Text>
-
+            <Button title = "next" onPress ={()=> this.props.navigation.navigate('questionthree')} />
           </View>
     )
   }
