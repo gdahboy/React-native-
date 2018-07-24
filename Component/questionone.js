@@ -3,7 +3,10 @@ import {View , Text  , Button} from 'react-native'
 // import { } from 'react-native-elements';
 
 export default class Questionone extends Component {
-
+  constructor(props) {
+    super(props)
+    
+  }
   render() {
     return (
       <View style={{flex : 1 }}>

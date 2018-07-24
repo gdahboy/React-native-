@@ -1,10 +1,12 @@
 import firebase from '../Core/firebase'
-import {View , Text , ActivityIndicator} from 'react-native' ; 
+import * as firebasee from 'firebase'
+import {View , Text , ActivityIndicator, Button} from 'react-native' ; 
 import React, { Component } from 'react'
 import fetchdatabse from '../Core/fetchdatabase'
 import { isObject } from 'util';
 import Choice from '../Component/ChoiceQuestion' ;
 import Home from '../Component/Home' ;  
+//import { Button } from 'react-native-elements';
 //import  jQuery from 'jquery' ; 
 //var anything = fetchdatabse() ;
 export default class test extends Component { 
@@ -16,18 +18,13 @@ export default class test extends Component {
     }
     //componentDidMount()
     componentDidMount() {
-          
             firebase.database().ref('users').on('value' , (data)=> {
                 var datareturn = data.toJSON() ; 
-                // console.log( ' the state is') ; 
-                // console.log(this.state) ;
-                this.setState({data : datareturn}) ; 
-                //console.log(this.state) ;
-        
+                        this.setState({data : datareturn}) ; 
             }); 
-        
-            
-            
+            if(Object.getOwnPropertyNames(this.state.data).length === 0){
+                this.props.navigation.navigate('Home') ; 
+            }
     }
     render(){
         if( Object.getOwnPropertyNames(this.state.data).length === 0 )  {
@@ -38,17 +35,21 @@ export default class test extends Component {
                 alignItems: 'center',}}>
               <ActivityIndicator />
               </View>
-          )
-      } else{
-          return(
-          <View style ={{ flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',}}>
-              <Home listeQuestion = {this.state.data} />
-          </View>
-          )
-      }
+          )}else{
+           // this.props.navigation.navigate('Home');
+              return( 
+            <View style= {{ flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',}}>
+              <Text>Ready to Go ??</Text>
+              <Button title='start' onPress ={()=> {this.props.navigation.navigate('Somethingelse' , {listeQuestion :  this.state.data} )  }}  />
+              </View>
+              )
+              
+            }
+          }
      
     }
-} 
+
+
