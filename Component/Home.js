@@ -1,4 +1,4 @@
-import React , {createElement} from 'react';
+import React  from 'react';
 import { StyleSheet, Text, View, ListView, Picker, Button, ScrollView, AppRegistry  , PickerItem , PickerIOS} from 'react-native';
 import { Card, Icon, SideMenu, List, ListItem } from 'react-native-elements'
 import IOSIcon from "react-native-vector-icons/Ionicons"
@@ -18,7 +18,8 @@ export  default class Home extends React.Component {
       selectedValue : '' ,
       test: [] ,
       count : 0  , 
-      language : ''
+      language : '' , 
+      itemIndex : 0
      
     }
   }
@@ -43,7 +44,7 @@ export  default class Home extends React.Component {
     var aaaa = [] ; 
     for(var i = 0 ; i <count ; i++) {
       aaaa.push(<Picker.item label = {bb[i]} value ={bb[i]} key = {i} />) ; 
-      console.log((bb[i]));
+      console.log(this.state.itemIndex);
     }
     return aaaa ; 
   } 
@@ -63,7 +64,7 @@ export  default class Home extends React.Component {
         <Picker
             selectedValue={this.state.language}
             style={{ flex: 0.5, height: 50, width: 100 }}
-            onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+            onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue  , itemIndex : itemIndex })}>
             {
               this.ewfegrhy(this.state.test , this.state.count).map((element , index) => {
                 return element 
@@ -76,7 +77,7 @@ export  default class Home extends React.Component {
 
         
         </View>
-        <Button title='Press' color='#841584' style={{ flex: 3 }} onPress ={()=> this.props.navigation.navigate('Questionone')} />
+        <Button title='Press' color='#841584' style={{ flex: 3 }} onPress ={()=> this.props.navigation.navigate('Questionone' ,  {listeQuestion :  this.state.itemIndex})} />
         
 
       </View>
