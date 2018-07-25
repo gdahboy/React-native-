@@ -72,14 +72,9 @@ export  default class Home extends React.Component {
             }
             
           </Picker>
-          
-            
-
-        
         </View>
         <Button title='Press' color='#841584' style={{ flex: 3 }} onPress ={()=> this.props.navigation.navigate('Questionone' ,  {listeQuestion :  this.state.itemIndex})} />
         
-
       </View>
     );
   }

@@ -5,8 +5,8 @@ import firebase from '../Core/firebase'
 
 // import { } from 'react-native-elements';
 var Question  = [
-  {label : "1"  , value : 0 } ,
-  {label : "0 " , value : 1 }  
+  {label : "jk"  , value : 0 } ,
+  {label : "0hhjjh" , value : 1 }  
 ];
 export default class Questionone extends Component {
   constructor(props) {
@@ -14,36 +14,36 @@ export default class Questionone extends Component {
     this.state = {
       Question : '' , 
       suggestion  : [] , 
-      itemIndex : 0 
+      itemIndex : 0  , 
+      data : []
     }
     
   }
-  aaa(){
-    console.log(typeof(this.state.suggestion));
-    return this.state.suggestion ; 
-  }
+  
   
   componentDidMount(){
-    var str =  'test/' + this.props.navigation.state.params.listeQuestion ; 
-    console.log(str) ; 
-
+    
+    var str =  'test/test/' + this.props.navigation.state.params.listeQuestion ;
+    console.log(str);
+    var tabsugg = [];  
     firebase.database().ref(str).on('value' , (data)=> {
-      var datareturn = data.toJSON() ;
-      var i = 0 ; 
-              this.setState({question : datareturn["Q1"]["question"]}) ;   
-                for (var element in datareturn["Q1"]["suggestion"] ) {
-                   var sugg = {label : element , value : i}
-                  this.setState({
-                    suggestion : this.state.suggestion.push(sugg)
-                  }) ; 
-                  i++ ; 
-                }
-              });   
-              console.log(this.state.suggestion)    ;
-              console.log(typeof(this.state.suggestion));
-              console.log("********************") ; 
-               
-  } 
+      var datareturn = data.toJSON() ;               
+      this.setState({question : datareturn["Q1"]["question"]}) ;
+      this.setState({data : datareturn }  ) ; 
+      var i = 0 ;   
+    for (var element in datareturn["Q1"]["suggestion"] ) {
+      var sugg = {label : element , value : i}
+       tabsugg.push(sugg);
+       console.log(sugg);
+        i++ ; 
+    }             
+      });
+      this.setState({suggestion : tabsugg})
+    }
+  
+  
+  
+
 
   
   
@@ -56,7 +56,7 @@ export default class Questionone extends Component {
             </Text >
             <RadioForm
                style={{flex : 2.5 , marginBottom: 10,  marginTop: 10,}}
-                radio_props = {this.aaa()}
+                radio_props = {this.state.suggestion}
                 onPress = {(value , itemIndex) => {this.setState({value : value , itemIndex : itemIndex})}}
                 />
 

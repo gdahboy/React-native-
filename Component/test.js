@@ -18,7 +18,7 @@ export default class test extends Component {
     }
     //componentDidMount()
     componentDidMount() {
-            firebase.database().ref('test').on('value' , (data)=> {
+            firebase.database().ref('test/test').on('value' , (data)=> {
                 var datareturn = data.toJSON() ; 
                         this.setState({data : datareturn}) ; 
             }); 
